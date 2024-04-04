@@ -4,17 +4,23 @@ import { Fraction } from 'fractional';
 class RecipeView {
     #parentElement = document.querySelector('.recipe');
     #data;
+    #errorMessage = "We could not find this recipe. Please search for another one."
+    #successMessage = "Found your recipe."
 
+
+    #clear(){
+      this.#parentElement.innerHTML = '';
+    };
     //Loading spinner
 
-renderSpinner = function () {
+renderSpinner () {
   const markup = `<div class="spinner">
   <svg>
     <use href="${icons}#icon-loader"></use>
   </svg>
 </div>
 `;
-  this.#parentElement.innerHTML = '';
+  this.#clear
   this.#parentElement.insertAdjacentHTML('afterbegin', markup);
 };
 
@@ -22,15 +28,45 @@ renderSpinner = function () {
     render(data){
         this.#data = data;
         this.#clear;
-        //recipeContainer.innerHTML = '';
-        //recipeContainer.insertAdjacentHTML('afterbegin', markUp);ws53475ty65rgb   
         const markup = this.#generateMarkup();
         this.#parentElement.insertAdjacentHTML('afterbegin', markup);
     }
 
-    #clear(){
-      this.#parentElement.innerHTML = '';
-    };
+ 
+
+    addHandlerRender(handler){
+      ['hashchange', 'load'].forEach(ev => window.addEventListener(ev,handler))
+
+    }
+
+    renderError(message = this.#errorMessage){
+      const markup = `
+      <div class="error">
+      <div>
+        <svg>
+          <use href="${icons}#icon-alert-triangle"></use>
+        </svg>
+      </div>
+      <p>${message}</p>
+    </div>
+      `
+      this.#clear
+      this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+    }
+    renderSuccessMessage(message = this.#successMessage){
+      const markup = `
+      <div class="message">
+      <div>
+        <svg>
+          <use href="${icons}#icon-smile"></use>
+        </svg>
+      </div>
+      <p>${message}</p>
+    </div>
+      `
+      this.#clear
+      this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+    }
 
    #generateMarkup(){
     return `
@@ -113,7 +149,7 @@ renderSpinner = function () {
         <div class="recipe__directions">
           <h2 class="heading--2">How to cook it</h2>
           <p class="recipe__directions-text">
-            This this.#data was carefully designed and tested by
+            This this recipe was carefully designed and tested by
             <span class="recipe__publisher">${
               this.#data?.publisher
             }</span>. Please check out
