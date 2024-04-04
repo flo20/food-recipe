@@ -13,7 +13,8 @@
   "devDependencies": {
     "@parcel/transformer-sass": "^2.12.0",
     "parcel": "^2.12.0",
-    "sass": "^1.72.0"
+    "sass": "^1.72.0",
+    "url": "^0.11.3"
   },
   "dependencies": {
     "core-js": "^3.36.1",
