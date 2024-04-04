@@ -3,6 +3,7 @@ import 'core-js';
 import 'regenerator-runtime/runtime';
 import recipeView from './views/recipeViews.js';
 import searchView from './views/searchView.js';
+import resultsView from './views/resultsView.js';
 
 const recipeContainer = document.querySelector('.recipe');
 
@@ -11,8 +12,7 @@ const recipeContainer = document.querySelector('.recipe');
 // Fetching and Loading data
 
 const controlRecipe = async function () {
-  //Loading spinner
-  recipeView.renderSpinner();
+ 
 
   try {
     const id = window.location.hash.slice(1)
@@ -20,7 +20,9 @@ const controlRecipe = async function () {
     await model.loadRecipe(id);
     //const {recipe} = model.state;
 
+    //Loading spinner
     if(!id) return;
+    recipeView.renderSpinner();
 
     
     // Rendering recipe
@@ -32,14 +34,15 @@ const controlRecipe = async function () {
 };
 
 const controlSearchResults = async function () {
-  // //Loading spinner
-  // recipeView.renderSpinner();
+  try {
+  
+
   const query = searchView.getQuery();
   if(!query) return;
-
-  try {
+  //Loading spinner
+  resultsView.renderSpinner();
     await model.loadSearchResults(query);
-    console.log(model.state.search.results);
+    resultsView.render(model.state.search.results)
     
   } catch (error) {
     recipeView.renderError(error)
