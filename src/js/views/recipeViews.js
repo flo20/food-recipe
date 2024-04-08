@@ -1,21 +1,21 @@
 import icons from 'url:../../img/icons.svg';
 import { Fraction } from 'fractional';
-import View from "./View.js";
+import View from './View.js';
 
 class RecipeView extends View {
-    _parentElement = document.querySelector('.recipe');
-    _errorMessage = "We could not find this recipe. Please search for another one."
-    _successMessage = "Found your recipe."
-    
+  _parentElement = document.querySelector('.recipe');
+  _errorMessage =
+    'We could not find this recipe. Please search for another one.';
+  _successMessage = 'Found your recipe.';
 
-    addHandlerRender(handler){
-      ['hashchange', 'load'].forEach(ev => window.addEventListener(ev,handler))
-    }
-    
-   _generateMarkup(){
+  addHandlerRender(handler) {
+    ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, handler));
+  }
+
+  _generateMarkup() {
     return `
 <figure class="recipe__fig">
-          <img src="${this._data?.image_url}" alt="${
+          <img src="${this._data?.image}" alt="${
       this._data?.title
     }" class="recipe__img" />
           <h1 class="recipe__title">
@@ -77,7 +77,11 @@ class RecipeView extends View {
               <svg class="recipe__icon">
                 <use href="src/img/icons.svg#icon-check"></use>
               </svg>
-              <div class="recipe__quantity">${ingredient.quantity ? new Fraction(ingredient.quantity).toString(): ""}</div>
+              <div class="recipe__quantity">${
+                ingredient.quantity
+                  ? new Fraction(ingredient.quantity).toString()
+                  : ''
+              }</div>
               <div class="recipe__description">
                 <span class="recipe__unit">${ingredient.unit}</span>
                 ${ingredient.description}
@@ -111,7 +115,7 @@ class RecipeView extends View {
           </a>
         </div>
 `;
-   }
+  }
 }
 
 export default new RecipeView();
