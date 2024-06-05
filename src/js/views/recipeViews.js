@@ -80,7 +80,7 @@ class RecipeView extends View {
           </button>
         </div>
 
-         <div class="recipe__ingredients">
+        <div class="recipe__ingredients">
           <h2 class="heading--2">Recipe ingredients</h2>
           <ul class="recipe__ingredient-list">
           ${this._data.ingredients

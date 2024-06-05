@@ -43,6 +43,7 @@ export const loadSearchResults = async function (query) {
         image: recipe.image,
       };
     });
+    state.search.currentPage = 1;
   } catch (error) {
     throw error;
   }
