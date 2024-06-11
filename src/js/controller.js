@@ -95,7 +95,7 @@ const controlAddRecipe = async function (newRecipe) {
     //render recipe
     recipeView.render(model.state.recipe);
 
-    //success message
+    // //success message
     addRecipeView.renderSuccessMessage();
 
     //close form window
